@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Contacto - Livergood Ltd - Tequila Premium</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="caja">
+            <h1><img src="imagenes/logot.png" alt="Logo de Livergood Ltd"></h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="productos.html">Productos</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="contacto-main">
+        <h2 class="contacto-titulo">Contáctanos</h2>
+        <p class="contacto-descripcion">Si tienes alguna pregunta o deseas más información sobre nuestros productos, no
+            dudes en ponerte en contacto con nosotros. Estamos aquí para ayudarte a disfrutar de los mejores tequilas.
+        </p>
+
+        <form class="contacto-formulario" action="contacto.php" method="POST">
+            <label for="nombreapellido">Nombre y Apellido</label>
+            <input type="text" id="nombreapellido" class="input-padron contacto-input" name="nombreapellido" required>
+
+            <label for="correoelectronico">Correo Electrónico</label>
+            <input type="email" id="correoelectronico" class="input-padron contacto-input" name="correo" required
+                placeholder="email@dominio.com">
+
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" class="input-padron contacto-input" name="telefono" required placeholder="(XX) XXXX XXXX">
+
+            <label for="mensaje">Mensaje</label>
+            <textarea cols="70" rows="10" id="mensaje" class="input-padron contacto-textarea" name="mensaje" required></textarea>
+
+            <fieldset class="contacto-fieldset">
+                <legend>¿Cómo prefieres que te contactemos?</legend>
+
+                <label for="radio-email"><input type="radio" name="contacto" value="email" id="radio-email">Email</label>
+                <label for="radio-telefono"><input type="radio" name="contacto" value="telefono" id="radio-telefono">Teléfono</label>
+                <label for="radio-whatsapp"><input type="radio" name="contacto" value="whatsapp" id="radio-whatsapp" checked>WhatsApp</label>
+            </fieldset>
+
+            <fieldset class="contacto-fieldset">
+                <legend>¿En qué horario prefieres ser contactado?</legend>
+                <select class="contacto-select" name="horario">
+                    <option value="Mañana">Mañana</option>
+                    <option value="Tarde">Tarde</option>
+                    <option value="Noche">Noche</option>
+                </select>
+            </fieldset>
+
+            <label class="contacto-checkbox"><input type="checkbox" name="novedades" value="Sí" checked>¿Te gustaría recibir novedades sobre nuestros tequilas?</label>
+
+            <input type="submit" value="Enviar formulario" class="contacto-submit">
+        </form>
+
+        <h3 class="contacto-subtitulo">Horarios de Atención</h3>
+        <p class="contacto-descripcion">Estamos disponibles para atender tus consultas en los siguientes horarios:</p>
+        <table class="contacto-tabla">
+            <thead>
+                <tr>
+                    <th>Día</th>
+                    <th>Horario</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Lunes a Viernes</td>
+                    <td>08:00 ~ 20:00</td>
+                </tr>
+                <tr>
+                    <td>Sábado</td>
+                    <td>09:00 ~ 14:00</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        <img src="imagenes/logo-blancot.png" alt="Logo de Livergood Ltd">
+        <p class="copyright">&copy; Copyright Livergood Ltd - 2024</p>
+    </footer>
+    <script>
+        function enviarFormulario(event) {
+            event.preventDefault(); 
+
+            // Simulación del envío de formulario
+            setTimeout(function () {
+                
+                document.querySelector('.contacto-formulario').style.display = 'none';
+
+                // Muestra el mensaje de confirmación
+                document.getElementById('confirmacion').style.display = 'block';
+            }, 1000);
+        }
+
+        function regresarAlInicio() {
+            window.location.href = 'index.html'; 
+        }
+    </script>
+</body>
+
+</html>
