@@ -13,23 +13,26 @@ if ($conn->connect_error) {
 $form_submitted = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nombreapellido = $conn->real_escape_string($_POST['nombreapellido']);
-    $correo = $conn->real_escape_string($_POST['correo']);
-    $telefono = $conn->real_escape_string($_POST['telefono']);
-    $mensaje = $conn->real_escape_string($_POST['mensaje']);
-    $contacto_preferencia = $conn->real_escape_string($_POST['contacto']);
-    $horario_preferencia = $conn->real_escape_string($_POST['horario']);
+    // Usar Sentencias Preparadas para mayor seguridad
+    $stmt = $conn->prepare("INSERT INTO contactos (nombreapellido, correo, telefono, mensaje, contacto_preferencia, horario_preferencia, novedades) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    
+    $nombreapellido = $_POST['nombreapellido'];
+    $correo = $_POST['correo'];
+    $telefono = $_POST['telefono'];
+    $mensaje = $_POST['mensaje'];
+    $contacto_preferencia = $_POST['contacto'];
+    $horario_preferencia = $_POST['horario'];
     $novedades = isset($_POST['novedades']) ? 1 : 0;
 
-    $sql = "INSERT INTO contactos (nombreapellido, correo, telefono, mensaje, contacto_preferencia, horario_preferencia, novedades)
-            VALUES ('$nombreapellido', '$correo', '$telefono', '$mensaje', '$contacto_preferencia', '$horario_preferencia', $novedades)";
+    $stmt->bind_param("ssssssi", $nombreapellido, $correo, $telefono, $mensaje, $contacto_preferencia, $horario_preferencia, $novedades);
 
-    if ($conn->query($sql) === TRUE) {
+    if ($stmt->execute()) {
         $form_submitted = true;
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        error_log("Error en INSERT: " . $stmt->error);
     }
 
+    $stmt->close();
     $conn->close();
 }
 ?>
